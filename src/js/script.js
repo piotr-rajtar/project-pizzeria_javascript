@@ -62,6 +62,8 @@
       thisProduct.renderInMenu();
       thisProduct.getElements();
       thisProduct.initAccordion();
+      thisProduct.initOrderForm();
+      thisProduct.processOrder();
 
       console.log('new Product:', thisProduct);
     }
@@ -111,6 +113,15 @@
         }
 
       });
+    }
+
+    initOrderForm(){
+      const thisProduct = this;
+      console.log('metoda initOrderForm');
+    }
+    processOrder(){
+      const thisProduct = this;
+      console.log('metoda processOrder');
     }
 
   }
