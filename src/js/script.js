@@ -135,10 +135,51 @@
       });
 
     }
-    
+
     processOrder(){
       const thisProduct = this;
-      console.log('metoda processOrder');
+      const formData = utils.serializeFormToObject(thisProduct.form); //----pokazuje ktora opcja jest zaznaczona - nazwa to klucz
+      let price = thisProduct.data.price;
+
+      const params = thisProduct.data.params; //------obiekt - klucze i wlasciwosci PARAMS - obiekt dla sauce, topping, crust itd
+
+      /* START LOOP: for each paramId in thisProduct.data.params */
+      for (let paramId in params) {
+
+        /* save the element in thisProduct.data.params with key paramId as const param */
+
+        const param = params[paramId]; //---------------------------------obiekt - klucze i wlasciwosci dla kazdego paramu osobno
+
+        /* START LOOP: for each optionId in param.options */
+
+        const options = param.options; //--------obiekt - zbior kluczy i wlasciwosci dla klucza 'options' dla pojedynczego paramu
+        for (let optionId in options) {
+
+          /* save the element in param.options with key optionId as const option */
+
+          const option = options[optionId]; //------------------------obiekt - zbior kluczy i wlasciwosci dla kazdej opcji osobno
+
+          /* START IF: if option is selected and option is not default */
+
+          const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
+          const optionNotSelected = (formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) == -1) || !formData.hasOwnProperty(paramId);
+
+          if(optionSelected && !option.default){
+            price = price + option.price;
+
+          /* END IF: if option is selected and option is not default */
+          }
+          /* START ELSE IF: if option is not selected and option is default */
+          else if(optionNotSelected && option.default) {
+            price = price - option.price;
+          /* END ELSE IF: if option is not selected and option is default */
+          }
+
+        /* END LOOP: for each optionId in param.options */
+        }
+      /* END LOOP: for each paramId in thisProduct.data.params */
+      }
+      thisProduct.priceElem.innerHTML = price;
     }
 
   }
