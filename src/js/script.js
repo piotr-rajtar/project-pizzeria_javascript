@@ -209,8 +209,18 @@
     constructor(element) {
       const thisWidget = this;
 
+      thisWidget.getElements(element);
       console.log('Amount Widget:', thisWidget);
       console.log('constructor arguments: ', element);
+    }
+
+    getElements(element){
+      const thisWidget = this;
+
+      thisWidget.element = element; //caly div z widgetem
+      thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input); //miejsce na liczbe
+      thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease); //guzik z minusem
+      thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease); //guzik z plusem
     }
   }
 
