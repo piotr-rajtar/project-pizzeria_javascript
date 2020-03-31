@@ -197,11 +197,18 @@
 
   }
 
+  class AmountWidget {
+    constructor(element) {
+      const thisWidget = this;
+
+      console.log('Amount Widget:', thisWidget);
+      console.log('constructor arguments: ', element);
+    }
+  }
+
   const app = {
     initMenu: function(){
       const thisApp = this;
-
-      console.log('thisApp.data: ', thisApp.data);
 
       for (let productData in thisApp.data.products){
         new Product(productData, thisApp.data.products[productData]);
