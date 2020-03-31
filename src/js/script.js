@@ -251,8 +251,8 @@
       const plusButton = thisWidget.linkIncrease;
       const minusButton = thisWidget.linkDecrease;
 
-      inputValue.addEventListener('change', function(value){ //przy zmianie inputu, jest on znowu konwertowany na cyfre
-        thisWidget.setValue(value);
+      inputValue.addEventListener('change', function(){ //przy zmianie inputu, jest on znowu konwertowany na cyfre
+        thisWidget.setValue(thisWidget.input.value);
       });
 
       plusButton.addEventListener('click', function(event){ //przy klikinieciu zmienia wartosc o 1 i konwertuje na cyfre
