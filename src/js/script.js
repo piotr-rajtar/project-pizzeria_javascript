@@ -232,6 +232,7 @@
                                         //bo wartosc z pola input bedzie tekstem
       /* TODO: Add validation */
       thisWidget.value = newValue; // zmienna newValue bedzie nowa wlasciwoscia obiektu thisWidget klucz: value-newValue
+      thisWidget.announce();
       thisWidget.input.value = thisWidget.value; //wrzucamy do inputa ta liczbe uzyskana z tekstu
                                                 //dzieki temu nowa wartosc wyswietli sie na stronie
     }
@@ -256,6 +257,13 @@
         event.preventDefault();
         thisWidget.setValue(thisWidget.value - 1);
       });
+    }
+
+    announce() {
+      const thisWidget = this;
+
+      const event = new Event('updated');
+      thisWidget.element.dispatchEvent(event); //wysylamy nowo stworzony event do standardowej grupy eventow
     }
   }
 
