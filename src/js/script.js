@@ -176,10 +176,16 @@
           /* END ELSE IF: if option is not selected and option is default */
           }
 
+          const targetImages = thisProduct.imageWrapper.querySelectorAll('.' + paramId + "-" + optionId);
+
           if(optionSelected){
-
+            for(let targetImage of targetImages) {
+              targetImage.classList.add(classNames.menuProduct.imageVisible);
+            }
           } else {
-
+            for(let targetImage of targetImages) {
+              targetImage.classList.remove(classNames.menuProduct.imageVisible);
+            }
           }
 
         /* END LOOP: for each optionId in param.options */
