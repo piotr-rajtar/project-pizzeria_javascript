@@ -211,6 +211,7 @@
 
       thisWidget.getElements(element); //wywoluje metode getElements ktora wyodrebniam guziki i miejsce na liczbe
       thisWidget.setValue(thisWidget.input.value); //uruchamiam metode set value ktora wstawia mi nowe liczby na strone
+      thisWidget.initActions(thisWidget.input.value);
       console.log('Amount Widget:', thisWidget); //obiekt ze wszystkim, guzikami, inputem, elementami html
       console.log('constructor arguments: ', element); //tylko kod html z divem z tym
     }
@@ -233,6 +234,28 @@
       thisWidget.value = newValue; // zmienna newValue bedzie nowa wlasciwoscia obiektu thisWidget klucz: value-newValue
       thisWidget.input.value = thisWidget.value; //wrzucamy do inputa ta liczbe uzyskana z tekstu
                                                 //dzieki temu nowa wartosc wyswietli sie na stronie
+    }
+
+    initActions(value) {
+      const thisWidget = this;
+
+      const inputValue = thisWidget.input; //const czy let
+      const plusButton = thisWidget.linkIncrease;
+      const minusButton = thisWidget.linkDecrease;
+
+      inputValue.addEventListener('change', function(value){ //przy zmianie inputu, jest on znowu konwertowany na cyfre
+        thisWidget.setValue(value);
+      });
+
+      plusButton.addEventListener('click', function(event){ //przy klikinieciu zmienia wartosc o 1 i konwertuje na cyfre
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.value + 1);
+      });
+
+      minusButton.addEventListener('click', function(event){
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.value - 1);
+      });
     }
   }
 
