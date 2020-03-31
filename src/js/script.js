@@ -206,12 +206,13 @@
   }
 
   class AmountWidget {
-    constructor(element) {
-      const thisWidget = this;
+    constructor(element) { //tu przekazuje kod html
+      const thisWidget = this; //na podstawie kodu tworzy sie obiekt
 
-      thisWidget.getElements(element);
-      console.log('Amount Widget:', thisWidget);
-      console.log('constructor arguments: ', element);
+      thisWidget.getElements(element); //wywoluje metode getElements ktora wyodrebniam guziki i miejsce na liczbe
+      thisWidget.setValue(thisWidget.input.value); //uruchamiam metode set value ktora wstawia mi nowe liczby na strone
+      console.log('Amount Widget:', thisWidget); //obiekt ze wszystkim, guzikami, inputem, elementami html
+      console.log('constructor arguments: ', element); //tylko kod html z divem z tym
     }
 
     getElements(element){
@@ -221,6 +222,17 @@
       thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input); //miejsce na liczbe
       thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease); //guzik z minusem
       thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease); //guzik z plusem
+    }
+
+    setValue(value) {
+      const thisWidget = this;
+
+      const newValue = parseInt(value); //zmienna newValue przyjmuje wartosc value zmieniona na liczbe calkowita
+                                        //bo wartosc z pola input bedzie tekstem
+      /* TODO: Add validation */
+      thisWidget.value = newValue; // zmienna newValue bedzie nowa wlasciwoscia obiektu thisWidget klucz: value-newValue
+      thisWidget.input.value = thisWidget.value; //wrzucamy do inputa ta liczbe uzyskana z tekstu
+                                                //dzieki temu nowa wartosc wyswietli sie na stronie
     }
   }
 
