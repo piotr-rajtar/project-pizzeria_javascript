@@ -87,7 +87,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
-      thissProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion(){
@@ -174,6 +174,12 @@
           else if(optionNotSelected && option.default) {
             price = price - option.price;
           /* END ELSE IF: if option is not selected and option is default */
+          }
+
+          if(optionSelected){
+
+          } else {
+
           }
 
         /* END LOOP: for each optionId in param.options */
