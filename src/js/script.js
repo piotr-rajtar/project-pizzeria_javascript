@@ -178,7 +178,7 @@
           /* END ELSE IF: if option is not selected and option is default */
           }
 
-          const targetImages = thisProduct.imageWrapper.querySelectorAll('.' + paramId + "-" + optionId);
+          const targetImages = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
 
           if(optionSelected){
             for(let targetImage of targetImages) {
@@ -238,28 +238,23 @@
     setValue(value) {
       const thisWidget = this;
 
-      const newValue = parseInt(value); //zmienna newValue przyjmuje wartosc value zmieniona na liczbe calkowita
-                                        //bo wartosc z pola input bedzie tekstem
+      const newValue = parseInt(value); //zmienna newValue przyjmuje wartosc value zmieniona na liczbe calkowita, bo wartosc z pola input bedzie tekstem
+
       /* TODO: Add validation */
 
-      const validDiffer = !(newValue == thisWidget.value);
-      console.log('new value', newValue);
-      console.log('input', thisWidget.input.value);
-      console.log('value', thisWidget.value);
-      console.log(validDiffer);
-      const validMin = thisWidget.value >= settings.amountWidget.defaultMin;
-      const validMax = thisWidget.value <= settings.amountWidget.defaultMax;
+      const validMin = thisWidget.value >= settings.amountWidget.defaultMin && thisWidget.input.value >= settings.amountWidget.defaultMin;
+      const validMax = thisWidget.value <= settings.amountWidget.defaultMax  && thisWidget.input.value <= settings.amountWidget.defaultMax;
 
-      if (validDiffer && validMin && validMax) {
+      if (validMin && validMax) {
         thisWidget.value = newValue; // zmienna newValue bedzie nowa wlasciwoscia obiektu thisWidget klucz: value-newValue
         thisWidget.announce();
       }
 
-      thisWidget.input.value = thisWidget.value; //wrzucamy do inputa ta liczbe uzyskana z tekstu
-                                                //dzieki temu nowa wartosc wyswietli sie na stronie
+      thisWidget.input.value = thisWidget.value; //wrzucamy do inputa ta liczbe uzyskana z tekstu, dzieki temu nowa wartosc wyswietli sie na stronie
+
     }
 
-    initActions(value) {
+    initActions() {
       const thisWidget = this;
 
       const inputValue = thisWidget.input; //const czy let
@@ -272,12 +267,20 @@
 
       plusButton.addEventListener('click', function(event){ //przy klikinieciu zmienia wartosc o 1 i konwertuje na cyfre
         event.preventDefault();
-        thisWidget.setValue(thisWidget.value + 1);
+        if (thisWidget.value == 9) {
+          thisWidget.setValue(thisWidget.value);
+        } else {
+          thisWidget.setValue(thisWidget.value + 1);
+        }
       });
 
       minusButton.addEventListener('click', function(event){
         event.preventDefault();
-        thisWidget.setValue(thisWidget.value - 1);
+        if (thisWidget.value == 1) {
+          thisWidget.setValue(thisWidget.value);
+        } else {
+          thisWidget.setValue(thisWidget.value - 1);
+        }
       });
     }
 
