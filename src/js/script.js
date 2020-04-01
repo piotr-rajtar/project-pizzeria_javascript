@@ -217,6 +217,9 @@
       const thisWidget = this; //na podstawie kodu tworzy sie obiekt
 
       thisWidget.getElements(element); //wywoluje metode getElements ktora wyodrebniam guziki i miejsce na liczbe
+
+      thisWidget.value = settings.amountWidget.defaultValue;
+
       thisWidget.setValue(thisWidget.input.value); //uruchamiam metode set value ktora wstawia mi nowe liczby na strone
       thisWidget.initActions(thisWidget.input.value);
       console.log('Amount Widget:', thisWidget); //obiekt ze wszystkim, guzikami, inputem, elementami html
@@ -238,8 +241,20 @@
       const newValue = parseInt(value); //zmienna newValue przyjmuje wartosc value zmieniona na liczbe calkowita
                                         //bo wartosc z pola input bedzie tekstem
       /* TODO: Add validation */
-      thisWidget.value = newValue; // zmienna newValue bedzie nowa wlasciwoscia obiektu thisWidget klucz: value-newValue
-      thisWidget.announce();
+
+      const validDiffer = !(newValue == thisWidget.value);
+      console.log('new value', newValue);
+      console.log('input', thisWidget.input.value);
+      console.log('value', thisWidget.value);
+      console.log(validDiffer);
+      const validMin = thisWidget.value >= settings.amountWidget.defaultMin;
+      const validMax = thisWidget.value <= settings.amountWidget.defaultMax;
+
+      if (validDiffer && validMin && validMax) {
+        thisWidget.value = newValue; // zmienna newValue bedzie nowa wlasciwoscia obiektu thisWidget klucz: value-newValue
+        thisWidget.announce();
+      }
+
       thisWidget.input.value = thisWidget.value; //wrzucamy do inputa ta liczbe uzyskana z tekstu
                                                 //dzieki temu nowa wartosc wyswietli sie na stronie
     }
