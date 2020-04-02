@@ -303,7 +303,7 @@
     constructor(element){
       const thisCart = this;
 
-      thisCart.products = [];
+      thisCart.products = []; //produkty dodane do koszyka
 
       thisCart.getElements(element);
 
@@ -313,7 +313,7 @@
     getElements(element){
       const thisCart = this;
 
-      thisCart.dom = {};
+      thisCart.dom = {}; //tu beda przechowywane wszystkie elementy DOM, wyszukane w koszyku
 
       thisCart.dom.wrapper = element;
     }
