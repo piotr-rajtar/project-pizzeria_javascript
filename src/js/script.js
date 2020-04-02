@@ -6,6 +6,7 @@
   const select = {
     templateOf: {
       menuProduct: '#template-menu-product',
+      cartProduct: '#template-cart-product',
     },
     containerOf: {
       menu: '#product-list',
@@ -26,10 +27,29 @@
     },
     widgets: {
       amount: {
-        input: 'input[name="amount"]',
+        input: 'input.amount',
         linkDecrease: 'a[href="#less"]',
         linkIncrease: 'a[href="#more"]',
       },
+    },
+
+    cart: {
+      productList: '.cart__order-summary',
+      toggleTrigger: '.cart__summary',
+      totalNumber: `.cart__total-number`,
+      totalPrice: '.cart__total-price strong, .cart__order-total .cart__order-price-sum strong',
+      subtotalPrice: '.cart__order-subtotal .cart__order-price-sum strong',
+      deliveryFee: '.cart__order-delivery .cart__order-price-sum strong',
+      form: '.cart__order',
+      formSubmit: '.cart__order [type="submit"]',
+      phone: '[name="phone"]',
+      address: '[name="address"]',
+    },
+    cartProduct: {
+      amountWidget: '.widget-amount',
+      price: '.cart__product-price',
+      edit: '[href="#edit"]',
+      remove: '[href="#remove"]',
     },
   };
 
@@ -38,6 +58,10 @@
       wrapperActive: 'active',
       imageVisible: 'active',
     },
+
+    cart: {
+      wrapperActive: 'active',
+    },
   };
 
   const settings = {
@@ -45,11 +69,16 @@
       defaultValue: 1,
       defaultMin: 1,
       defaultMax: 9,
-    }
+    },
+
+    cart: {
+      defaultDeliveryFee: 20,
+    },
   };
 
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
+    cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
   };
 
   class Product {
@@ -65,8 +94,6 @@
       thisProduct.initOrderForm();
       thisProduct.initAmountWidget();
       thisProduct.processOrder();
-
-      console.log('new Product:', thisProduct);
     }
 
     renderInMenu() {
@@ -146,36 +173,22 @@
 
       const params = thisProduct.data.params; //------obiekt - klucze i wlasciwosci PARAMS - obiekt dla sauce, topping, crust itd
 
-      /* START LOOP: for each paramId in thisProduct.data.params */
       for (let paramId in params) {
 
-        /* save the element in thisProduct.data.params with key paramId as const param */
-
         const param = params[paramId]; //---------------------------------obiekt - klucze i wlasciwosci dla kazdego paramu osobno
-
-        /* START LOOP: for each optionId in param.options */
 
         const options = param.options; //--------obiekt - zbior kluczy i wlasciwosci dla klucza 'options' dla pojedynczego paramu
         for (let optionId in options) {
 
-          /* save the element in param.options with key optionId as const option */
-
           const option = options[optionId]; //------------------------obiekt - zbior kluczy i wlasciwosci dla kazdej opcji osobno
-
-          /* START IF: if option is selected and option is not default */
 
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
           const optionNotSelected = (formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) == -1) || !formData.hasOwnProperty(paramId);
 
           if(optionSelected && !option.default){
             price = price + option.price;
-
-          /* END IF: if option is selected and option is not default */
-          }
-          /* START ELSE IF: if option is not selected and option is default */
-          else if(optionNotSelected && option.default) {
+          } else if(optionNotSelected && option.default) {
             price = price - option.price;
-          /* END ELSE IF: if option is not selected and option is default */
           }
 
           const targetImages = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
@@ -189,13 +202,9 @@
               targetImage.classList.remove(classNames.menuProduct.imageVisible);
             }
           }
-
-        /* END LOOP: for each optionId in param.options */
         }
-      /* END LOOP: for each paramId in thisProduct.data.params */
       }
 
-      /* multiply price by amount */
       price *= thisProduct.amountWidget.value;
       thisProduct.priceElem.innerHTML = price;
     }
@@ -222,8 +231,8 @@
 
       thisWidget.setValue(thisWidget.input.value); //uruchamiam metode set value ktora wstawia mi nowe liczby na strone
       thisWidget.initActions(thisWidget.input.value);
-      console.log('Amount Widget:', thisWidget); //obiekt ze wszystkim, guzikami, inputem, elementami html
-      console.log('constructor arguments: ', element); //tylko kod html z divem z tym
+      //console.log('Amount Widget:', thisWidget); //obiekt ze wszystkim, guzikami, inputem, elementami html
+      //console.log('constructor arguments: ', element); //tylko kod html z divem z tym
     }
 
     getElements(element){
@@ -239,8 +248,6 @@
       const thisWidget = this;
 
       const newValue = parseInt(value); //zmienna newValue przyjmuje wartosc value zmieniona na liczbe calkowita, bo wartosc z pola input bedzie tekstem
-
-      /* TODO: Add validation */
 
       const validMin = thisWidget.value >= settings.amountWidget.defaultMin && thisWidget.input.value >= settings.amountWidget.defaultMin;
       const validMax = thisWidget.value <= settings.amountWidget.defaultMax  && thisWidget.input.value <= settings.amountWidget.defaultMax;
@@ -309,11 +316,11 @@
 
     init: function(){
       const thisApp = this;
-      console.log('*** App starting ***');
-      console.log('thisApp:', thisApp);
-      console.log('classNames:', classNames);
-      console.log('settings:', settings);
-      console.log('templates:', templates);
+      //console.log('*** App starting ***');
+      //console.log('thisApp:', thisApp);
+      //console.log('classNames:', classNames);
+      //console.log('settings:', settings);
+      //console.log('templates:', templates);
 
       thisApp.initData();
       thisApp.initMenu();
