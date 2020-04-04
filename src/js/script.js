@@ -239,6 +239,7 @@
       thisProduct.amount = thisProduct.amountWidget.value;
 
       app.cart.add(thisProduct);
+
     }
 
   }
@@ -359,6 +360,39 @@
 
       cartProductList.appendChild(thisCart.dom.productList); //do wrappera produktow w HTML wrzucam produkty z wrappera produktow w koszyku
 
+      thisCart.products.push(menuProduct);
+      console.log('this cart product:', thisCart.products);
+
+    }
+  }
+
+  class CartProduct{
+    constructor(menuProduct, element){
+      thisCartProduct = this;
+
+      thisCartProduct.id = menuProduct.id;
+      thisCartProduct.name = menuProduct.name;
+      thisCartProduct.price = menuProduct.price;
+      thisCartProduct.priceSingle = menuProduct.priceSingle;
+      thisCartProduct.amount = menuProduct.amount;
+      thisCartProduct.params = JSON.parse(JSON.stringify(menuProduct.params));
+
+      thisCartProduct.getElements(element);
+
+      console.log('new cart product', thisCartProduct);
+      console.log('product data', menuProduct);
+    }
+
+    getElements(element){
+      thisCartProduct = this;
+
+      thisCartProduct.dom = {};
+
+      thisCartProduct.dom.wrapper = element;
+      thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
+      thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
+      thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
+      thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
     }
   }
 
