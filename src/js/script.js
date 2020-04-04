@@ -206,8 +206,10 @@
         }
       }
 
-      price *= thisProduct.amountWidget.value;
-      thisProduct.priceElem.innerHTML = price;
+      thisProduct.priceSingle = price;
+      thisProduct.price = thisProduct.priceSingle * thisProduct.amountWidget.value;
+
+      thisProduct.priceElem.innerHTML = thisProduct.price;
     }
 
     initAmountWidget(){
