@@ -327,10 +327,10 @@
 
       thisCart.products = []; //produkty dodane do koszyka
 
-      thisCart.getElements(element);
+      thisCart.getElements(element); //pobiera elementy z produktów w koszyku
       thisCart.initActions();
 
-      console.log('new Cart', thisCart);
+      //console.log('new Cart', thisCart);
     }
 
     getElements(element){
@@ -338,21 +338,27 @@
 
       thisCart.dom = {}; //tu beda przechowywane wszystkie elementy DOM, wyszukane w koszyku
 
-      thisCart.dom.wrapper = element;
-      thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+      thisCart.dom.wrapper = element; //cały koszyk
+      thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger); //podsumowanie zamówienia na dole
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList); //lista produktów w koszyku
     }
 
     initActions(){
       const thisCart = this;
       thisCart.dom.toggleTrigger.addEventListener('click', function(){
-        thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
+        thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive); //za kliknięciem pojawia się ukryty koszyk
       });
     }
 
     add(menuProduct){
-      //const thisCart = this;
+      const thisCart = this;
+      const generatedHTML = templates.cartProduct(menuProduct); //z obiektu produktu generujemy HTML
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML); // ten kod HTML wrzucamy do diva
+      const cartProductList = document.querySelector(select.cart.productList); //do stałej przypisuje wrapper produktow w HTMLu
+      thisCart.dom.productList = generatedDOM; //do wrappera produktow w koszyku wrzucam swoje divy
 
-      console.log('adding product', menuProduct);
+      cartProductList.appendChild(thisCart.dom.productList); //do wrappera produktow w HTML wrzucam produkty z wrappera produktow w koszyku
+
     }
   }
 
