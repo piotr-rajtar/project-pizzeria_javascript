@@ -170,6 +170,7 @@
     processOrder(){
       const thisProduct = this;
       const formData = utils.serializeFormToObject(thisProduct.form); //----pokazuje ktora opcja jest zaznaczona - nazwa to klucz
+      thisProduct.params = {};
       let price = thisProduct.data.price;
 
       const params = thisProduct.data.params; //------obiekt - klucze i wlasciwosci PARAMS - obiekt dla sauce, topping, crust itd
@@ -195,6 +196,14 @@
           const targetImages = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
 
           if(optionSelected){
+            if(!thisProduct.params[paramId]) {
+              thisProduct.params[paramId] = {
+                label: param.label,
+                options: {},
+              };
+            }
+            thisProduct.params[paramId].options[optionId] = option.label;
+
             for(let targetImage of targetImages) {
               targetImage.classList.add(classNames.menuProduct.imageVisible);
             }
@@ -210,6 +219,7 @@
       thisProduct.price = thisProduct.priceSingle * thisProduct.amountWidget.value;
 
       thisProduct.priceElem.innerHTML = thisProduct.price;
+      console.log('product params', thisProduct.params);
     }
 
     initAmountWidget(){
@@ -224,6 +234,9 @@
 
     addToCart(){
       const thisProduct = this;
+
+      thisProduct.name = thisProduct.data.name;
+      thisProduct.amount = thisProduct.amountWidget.value;
 
       app.cart.add(thisProduct);
     }
