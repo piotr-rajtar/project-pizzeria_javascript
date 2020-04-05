@@ -343,6 +343,12 @@
       thisCart.dom.wrapper = element; //cały koszyk
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger); //podsumowanie zamówienia na dole
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList); //lista produktów w koszyku
+      
+      thisCart.renderTotalKeys = ['totalNumber', 'totalPrice', 'subtotalPrice', 'deliveryFee'];
+
+      for (let key of thisCart.renderTotalKeys){
+        thisCart.dom[key] = thisCart.dom.wrapper.querySelectorAll(select.cart[key]);
+      }
     }
 
     initActions(){
