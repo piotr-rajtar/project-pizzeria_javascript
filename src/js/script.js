@@ -219,7 +219,7 @@
       thisProduct.price = thisProduct.priceSingle * thisProduct.amountWidget.value;
 
       thisProduct.priceElem.innerHTML = thisProduct.price;
-      console.log('product params', thisProduct.params);
+      //console.log('product params', thisProduct.params);
     }
 
     initAmountWidget(){
@@ -353,14 +353,14 @@
 
     add(menuProduct){
       const thisCart = this;
-      const generatedHTML = templates.cartProduct(menuProduct); //z obiektu produktu generujemy HTML
+      const generatedHTML = templates.cartProduct(menuProduct); //z obiektu produktu - np pizza z zaznaczonymi opcjami, generujemy HTML
       const generatedDOM = utils.createDOMFromHTML(generatedHTML); // ten kod HTML wrzucamy do diva
       const cartProductList = document.querySelector(select.cart.productList); //do stałej przypisuje wrapper produktow w HTMLu
       thisCart.dom.productList = generatedDOM; //do wrappera produktow w koszyku wrzucam swoje divy
 
       cartProductList.appendChild(thisCart.dom.productList); //do wrappera produktow w HTML wrzucam produkty z wrappera produktow w koszyku
-
-      thisCart.products.push(menuProduct);
+    
+      thisCart.products.push(new CartProduct(menuProduct, generatedDOM)); // do tablicy wrzucam nowe instancje klasy, czyli każdego wybranego produktu osobno
       console.log('this cart product:', thisCart.products);
 
     }
@@ -368,7 +368,7 @@
 
   class CartProduct{
     constructor(menuProduct, element){
-      thisCartProduct = this;
+      const thisCartProduct = this;
 
       thisCartProduct.id = menuProduct.id;
       thisCartProduct.name = menuProduct.name;
@@ -380,11 +380,11 @@
       thisCartProduct.getElements(element);
 
       console.log('new cart product', thisCartProduct);
-      console.log('product data', menuProduct);
+      //console.log('product data', menuProduct);
     }
 
     getElements(element){
-      thisCartProduct = this;
+      const thisCartProduct = this;
 
       thisCartProduct.dom = {};
 
