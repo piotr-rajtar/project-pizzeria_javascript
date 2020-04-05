@@ -361,7 +361,7 @@
       cartProductList.appendChild(thisCart.dom.productList); //do wrappera produktow w HTML wrzucam produkty z wrappera produktow w koszyku
     
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM)); // do tablicy wrzucam nowe instancje klasy, czyli każdego wybranego produktu osobno
-      console.log('this cart product:', thisCart.products);
+      //console.log('this cart product:', thisCart.products);
 
     }
   }
@@ -380,7 +380,7 @@
       thisCartProduct.getElements(element);
       thisCartProduct.initAmountWidget();
 
-      console.log('new cart product', thisCartProduct);
+      //console.log('new cart product', thisCartProduct);
       //console.log('product data', menuProduct);
     }
 
