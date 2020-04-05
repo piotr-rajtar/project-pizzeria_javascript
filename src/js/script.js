@@ -317,7 +317,9 @@
     announce() {
       const thisWidget = this;
 
-      const event = new Event('updated');
+      const event = new CustomEvent('updated', {
+        bubbles: true
+      });
       thisWidget.element.dispatchEvent(event); //wysylamy nowo stworzony event do standardowej grupy eventow
     }
   }
