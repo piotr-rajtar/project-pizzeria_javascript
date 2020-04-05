@@ -385,6 +385,12 @@
 
       thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
 
+      for (let key of thisCart.renderTotalKeys){
+        for (let elem of thisCart.dom[key]){
+          elem.innerHTML = thisCart[key];
+        }
+      }
+
       //console.log('subprice', thisCart.subtotalPrice);
       //console.log('total number', thisCart.totalNumber);
       //console.log('total price', thisCart.totalPrice);
