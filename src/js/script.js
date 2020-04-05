@@ -367,7 +367,7 @@
   }
 
   class CartProduct{
-    constructor(menuProduct, element){
+    constructor(menuProduct, element){ // menu product - to obiekt - to np pizza z zaznaczoymi opcjami a element - dom element - to fragment html z zapisem tej pizzy
       const thisCartProduct = this;
 
       thisCartProduct.id = menuProduct.id;
