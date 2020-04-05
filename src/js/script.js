@@ -327,6 +327,7 @@
       const thisCart = this;
 
       thisCart.products = []; //produkty dodane do koszyka
+      thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
 
       thisCart.getElements(element); //pobiera elementy z produktów w koszyku
       thisCart.initActions();
@@ -362,7 +363,25 @@
     
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM)); // do tablicy wrzucam nowe instancje klasy, czyli każdego wybranego produktu osobno
       //console.log('this cart product:', thisCart.products);
+      thisCart.update();
+    }
 
+    update(){
+      const thisCart = this;
+
+      thisCart.totalNumber = 0;
+      thisCart.subtotalPrice = 0;
+
+      for (let product of thisCart.products) {
+        thisCart.subtotalPrice += product.price;
+        thisCart.totalNumber += product.amount;
+      }
+
+      thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
+
+      //console.log('subprice', thisCart.subtotalPrice);
+      //console.log('total number', thisCart.totalNumber);
+      //console.log('total price', thisCart.totalPrice);
     }
   }
 
