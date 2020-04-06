@@ -334,7 +334,6 @@
       thisCart.getElements(element); //pobiera elementy z produktów w koszyku
       thisCart.initActions();
 
-      //console.log('new Cart', thisCart);
     }
 
     getElements(element){
@@ -345,7 +344,6 @@
       thisCart.dom.wrapper = element; //cały koszyk
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger); //podsumowanie zamówienia na dole
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList); //lista produktów w koszyku
-      
       thisCart.renderTotalKeys = ['totalNumber', 'totalPrice', 'subtotalPrice', 'deliveryFee'];
 
       for (let key of thisCart.renderTotalKeys){
@@ -378,7 +376,6 @@
       cartProductList.appendChild(thisCart.dom.productList); //do wrappera produktow w HTML wrzucam produkty z wrappera produktow w koszyku
     
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM)); // do tablicy wrzucam nowe instancje klasy, czyli każdego wybranego produktu osobno
-      //console.log('this cart product:', thisCart.products);
       thisCart.update();
     }
 
@@ -401,12 +398,22 @@
         }
       }
     }
+
+    remove(cartProduct){
+      const thisCart = this;
+
+      const index = thisCart.products.indexOf(cartProduct); //zbieram indeks elementu ktory chce usunac
+
+      thisCart.products.splice(index, 1); //usuwam dany element z tablicy produktow
+
+      cartProduct.dom.wrapper.remove(); //usuwam dany element DOM (element li  z koszyka ktory jest przekazywany do klasy cartProduct)
+      thisCart.update();
+    }
   }
 
   class CartProduct{
     constructor(menuProduct, element){ // menu product - to obiekt - to np pizza z zaznaczoymi opcjami a element - dom element - to fragment html z zapisem tej pizzy
       const thisCartProduct = this;
-
       thisCartProduct.id = menuProduct.id;
       thisCartProduct.name = menuProduct.name;
       thisCartProduct.price = menuProduct.price;
