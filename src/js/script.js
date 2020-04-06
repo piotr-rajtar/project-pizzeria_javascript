@@ -362,6 +362,10 @@
       thisCart.dom.productList.addEventListener('updated', function(){
         thisCart.update();
       });
+
+      thisCart.dom.productList.addEventListener('remove', function(){
+        thisCart.remove(event.detail.cartProduct);
+      });
     }
 
     add(menuProduct){
@@ -396,10 +400,6 @@
           elem.innerHTML = thisCart[key];
         }
       }
-
-      //console.log('subprice', thisCart.subtotalPrice);
-      //console.log('total number', thisCart.totalNumber);
-      //console.log('total price', thisCart.totalPrice);
     }
   }
 
