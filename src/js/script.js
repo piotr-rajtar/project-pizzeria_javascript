@@ -499,7 +499,23 @@
     initData: function(){
       const thisApp = this;
 
-      thisApp.data = dataSource;
+      thisApp.data = {};
+
+      const url = settings.db.url + '/' + settings.db.product;
+
+      fetch(url)
+        .then(function(rawResponse){
+          return rawResponse.json();
+        })
+        .then(function(parsedResponse){
+          console.log('parsedResponse', parsedResponse);
+
+          /* saved parsedResponse as thisApp.data.products */
+
+          /* execute initMenu method */
+        });
+
+        console.log('thisApp.data', JSON.stringify(thisApp.data));
     },
 
     initCart: function(){
