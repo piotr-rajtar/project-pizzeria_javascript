@@ -421,6 +421,32 @@
       cartProduct.dom.wrapper.remove(); //usuwam dany element DOM (element li  z koszyka ktory jest przekazywany do klasy cartProduct)
       thisCart.update();
     }
+
+    sendOrder(){
+      const thisCart = this;
+
+      const url = settings.db.url + '/' + settings.db.order; //adres endpointu
+
+      const payload = {
+        address: 'test',
+        totalPrice: thisCart.totalPrice,
+      };
+
+      const options = {
+        method: 'POST', //zmieniamy domyslna metode GET na POST
+        headers: { 
+          'Content-Type': 'application/json', //dajemy serwerpwi znac jaki rodzaj danych do niego wysylamy
+        },
+        body: JSON.stringify(payload), //tresc 
+      };
+
+      fetch(url, options)
+        .then(function(response){
+          return response.json();
+        }).then(function(parsedResponse){
+          console.log('parsedResponse', parsedResponse);
+        });
+    }
   }
 
   class CartProduct{
