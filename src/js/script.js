@@ -442,7 +442,7 @@
       };
 
       for (let product of thisCart.products){
-        payload.products.push(getData(product));
+        payload.products.push(thisCart.getData(product));
       }
 
       const options = {
@@ -460,6 +460,20 @@
           console.log('parsedResponse', parsedResponse);
         });
     }
+
+    getData(singleProduct){
+      const product = {};
+
+      product.id = singleProduct.id;
+      product.amount = singleProduct.amount;
+      product.price = singleProduct.price;
+      product.priceSingle = singleProduct.priceSingle;
+      product.params = singleProduct.params;
+      console.log('product object', product);
+      return product;
+      
+    }
+
   }
 
   class CartProduct{
@@ -528,8 +542,22 @@
         event.preventDefault();
         thisCartProduct.remove();
       });
-
     }
+
+    /*getData(singleProduct){
+      const thisCartProduct = this;
+
+      const product = {};
+
+      product.id = singleProduct.id;
+      product.amount = singleProduct.amount;
+      product.price = singleProduct.price;
+      product.priceSingle = singleProduct.priceSingle;
+      product.params = singleProduct.params;
+
+      return JSON.stringify(product);
+      
+    } */
   }
 
   const app = {
