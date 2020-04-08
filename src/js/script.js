@@ -376,6 +376,8 @@
 
       thisCart.dom.form.addEventListener('submit', function(event){
         event.preventDefault();
+        thisCart.phone = thisCart.dom.phone.value;
+        thisCart.address = thisCart.dom.address.value;
         thisCart.sendOrder();
       })
     }
@@ -430,7 +432,8 @@
       const url = settings.db.url + '/' + settings.db.order; //adres endpointu
 
       const payload = {
-        address: 'test',
+        phone: thisCart.phone,
+        address: thisCart.address,
         totalPrice: thisCart.totalPrice,
       };
 
