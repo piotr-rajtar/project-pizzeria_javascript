@@ -434,8 +434,16 @@
       const payload = {
         phone: thisCart.phone,
         address: thisCart.address,
+        number: thisCart.totalNumber,
+        subtotalPrice: thisCart.subtotalPrice,
+        deliveryFee: thisCart.deliveryFee,
         totalPrice: thisCart.totalPrice,
+        products: [],
       };
+
+      for (let product of thisCart.products){
+        payload.products.push(getData(product));
+      }
 
       const options = {
         method: 'POST', //zmieniamy domyslna metode GET na POST
