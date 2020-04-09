@@ -379,7 +379,7 @@
         thisCart.phone = thisCart.dom.phone.value;
         thisCart.address = thisCart.dom.address.value;
         thisCart.sendOrder();
-      })
+      });
     }
 
     add(menuProduct){
@@ -442,7 +442,7 @@
       };
 
       for (let product of thisCart.products){
-        payload.products.push(thisCart.getData(product));
+        payload.products.push(product.getData()); //thisCart.product to instancja klasy cart product wiec mozna sie do nich odwolywac
       }
 
       const options = {
@@ -461,19 +461,6 @@
         });
     }
 
-    getData(singleProduct){
-      const product = {};
-
-      product.id = singleProduct.id;
-      product.amount = singleProduct.amount;
-      product.price = singleProduct.price;
-      product.priceSingle = singleProduct.priceSingle;
-      product.params = singleProduct.params;
-      console.log('product object', product);
-      return product;
-      
-    }
-
   }
 
   class CartProduct{
@@ -489,9 +476,6 @@
       thisCartProduct.getElements(element);
       thisCartProduct.initAmountWidget();
       thisCartProduct.initActions();
-
-      //console.log('new cart product', thisCartProduct);
-      //console.log('product data', menuProduct);
     }
 
     getElements(element){
@@ -544,20 +528,18 @@
       });
     }
 
-    /*getData(singleProduct){
+    getData(){
       const thisCartProduct = this;
-
       const product = {};
 
-      product.id = singleProduct.id;
-      product.amount = singleProduct.amount;
-      product.price = singleProduct.price;
-      product.priceSingle = singleProduct.priceSingle;
-      product.params = singleProduct.params;
+      product.id = thisCartProduct.id;
+      product.amount = thisCartProduct.amount;
+      product.price = thisCartProduct.price;
+      product.priceSingle = thisCartProduct.priceSingle;
+      product.params = thisCartProduct.params;
 
-      return JSON.stringify(product);
-      
-    } */
+      return JSON.stringify(product); 
+    }
   }
 
   const app = {
