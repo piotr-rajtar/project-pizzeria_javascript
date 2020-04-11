@@ -2,7 +2,7 @@ import {settings, select} from '../settings.js';
 
 class AmountWidget {
   constructor(element) { //tu przekazuje kod html
-    const thisWidget = this; //na podstawie kodu tworzy sie obiekt
+    const thisWidget = this; //na podstawie kodu tworzy sie obiekt, z guzikiami i elementami HTML
 
     thisWidget.getElements(element); //wywoluje metode getElements ktora wyodrebniam guziki i miejsce na liczbe
 
@@ -10,8 +10,6 @@ class AmountWidget {
 
     thisWidget.setValue(thisWidget.input.value); //uruchamiam metode set value ktora wstawia mi nowe liczby na strone
     thisWidget.initActions(thisWidget.input.value);
-    //console.log('Amount Widget:', thisWidget); //obiekt ze wszystkim, guzikami, inputem, elementami html
-    //console.log('constructor arguments: ', element); //tylko kod html z divem z tym
   }
 
   getElements(element){

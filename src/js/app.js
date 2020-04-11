@@ -25,10 +25,8 @@ const app = {
       .then(function(parsedResponse){
         console.log('parsedResponse', parsedResponse);
 
-        /* saved parsedResponse as thisApp.data.products */
         thisApp.data.products = parsedResponse;
 
-        /* execute initMenu method */
         thisApp.initMenu();
       });
 
@@ -50,11 +48,6 @@ const app = {
 
   init: function(){
     const thisApp = this;
-    //console.log('*** App starting ***');
-    //console.log('thisApp:', thisApp);
-    //console.log('classNames:', classNames);
-    //console.log('settings:', settings);
-    //console.log('templates:', templates);
 
     thisApp.initData();
     thisApp.initCart();
