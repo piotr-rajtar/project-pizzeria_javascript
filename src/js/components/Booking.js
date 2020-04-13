@@ -1,18 +1,21 @@
 class Booking {
-    constructor(){
-        thisBooking = this;
+  constructor(element){
+    const thisBooking = this;
 
-    }
+    thisBooking.render(element);
+    thisBooking.initWidgets();
 
-    render(){
-        thisBooking = this;
+  }
 
-    }
+  render(){
+    const thisBooking = this;
 
-    initWidgets(){
-        thisBooking = this;
+  }
 
-    }
+  initWidgets(){
+    const thisBooking = this;
+
+  }
 
 }
 
