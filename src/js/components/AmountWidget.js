@@ -1,81 +1,62 @@
 import {settings, select} from '../settings.js';
+import BaseWidget from './BaseWidget.js';
 
-class AmountWidget {
+class AmountWidget extends BaseWidget {
   constructor(element) { //tu przekazuje kod html
+    super(element, settings.amountWidget.defaultValue);
+    
     const thisWidget = this;
 
-    thisWidget.getElements(element); //wywoluje metode getElements ktora wyodrebniam guziki i miejsce na liczbe
+    thisWidget.getElements(element);
 
-    thisWidget.value = settings.amountWidget.defaultValue;
+    thisWidget.dom.input.value = settings.amountWidget.defaultValue; //zeby na starcie byla widoczna domysla wartosc w inpucie
 
-    thisWidget.setValue(thisWidget.input.value); //uruchamiam metode set value ktora wstawia mi nowe liczby na strone
-    thisWidget.initActions(thisWidget.input.value);
+    thisWidget.initActions(thisWidget.dom.input.value);
    
   }
 
-  getElements(element){
+  getElements(){
     const thisWidget = this;
 
-    thisWidget.element = element; //caly div z widgetem
-    thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input); //miejsce na liczbe
-    thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease); //guzik z minusem
-    thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease); //guzik z plusem
+    thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.amount.input);
+    thisWidget.dom.linkDecrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkDecrease);
+    thisWidget.dom.linkIncrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
   }
 
-  setValue(value) {
+  isValid(value){
+
+    return !isNaN(value)
+      && value >= settings.amountWidget.defaultMin
+      && value <= settings.amountWidget.defaultMax;
+     
+  }
+
+  renderValue(){ //metode renderujaca, czyli wyswietlajaca wartosc na stronie
     const thisWidget = this;
 
-    const newValue = parseInt(value); //zmienna newValue przyjmuje wartosc value zmieniona na liczbe calkowita, bo wartosc z pola input bedzie tekstem
-
-    const validMin = thisWidget.value >= settings.amountWidget.defaultMin && thisWidget.input.value >= settings.amountWidget.defaultMin;
-    const validMax = thisWidget.value <= settings.amountWidget.defaultMax  && thisWidget.input.value <= settings.amountWidget.defaultMax;
-
-    if (validMin && validMax) {
-      thisWidget.value = newValue; // zmienna newValue bedzie nowa wlasciwoscia obiektu thisWidget klucz: value-newValue
-      thisWidget.announce();
-    }
-
-    thisWidget.input.value = thisWidget.value; //wrzucamy do inputa ta liczbe uzyskana z tekstu, dzieki temu nowa wartosc wyswietli sie na stronie
-
+    thisWidget.dom.input.value = thisWidget.value;
   }
 
   initActions() {
     const thisWidget = this;
 
-    const inputValue = thisWidget.input;
-    const plusButton = thisWidget.linkIncrease;
-    const minusButton = thisWidget.linkDecrease;
+    const inputValue = thisWidget.dom.input;
+    const plusButton = thisWidget.dom.linkIncrease;
+    const minusButton = thisWidget.dom.linkDecrease;
 
-    inputValue.addEventListener('change', function(){ //przy zmianie inputu, jest on znowu konwertowany na cyfre
-      thisWidget.setValue(thisWidget.input.value);
+    inputValue.addEventListener('change', function(){
+      thisWidget.value = thisWidget.dom.input.value;
     });
 
-    plusButton.addEventListener('click', function(event){ //przy klikinieciu zmienia wartosc o 1 i konwertuje na cyfre
+    plusButton.addEventListener('click', function(event){
       event.preventDefault();
-      if (thisWidget.value == 9) {
-        thisWidget.setValue(thisWidget.value);
-      } else {
-        thisWidget.setValue(thisWidget.value + 1);
-      }
+      thisWidget.setValue(thisWidget.value + 1);
     });
 
     minusButton.addEventListener('click', function(event){
       event.preventDefault();
-      if (thisWidget.value == 1) {
-        thisWidget.setValue(thisWidget.value);
-      } else {
-        thisWidget.setValue(thisWidget.value - 1);
-      }
+      thisWidget.setValue(thisWidget.value - 1);
     });
-  }
-
-  announce() {
-    const thisWidget = this;
-
-    const event = new CustomEvent('updated', {
-      bubbles: true
-    });
-    thisWidget.element.dispatchEvent(event); //wysylamy nowo stworzony event do standardowej grupy eventow
   }
 }
 
