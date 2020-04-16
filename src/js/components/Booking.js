@@ -36,15 +36,11 @@ class Booking {
       ],
     };
 
-    //console.log('getData params', params);
-
     const urls = { //adresy endpointu co zwroca albo liste rezerwacji albo wydarzen
       booking:        settings.db.url + '/' + settings.db.booking + '?' + params.booking.join('&'),
       eventsCurrent:  settings.db.url + '/' + settings.db.event   + '?' + params.eventsCurrent.join('&'),
       eventsRepeat:   settings.db.url + '/' + settings.db.event   + '?' + params.eventsRepeat.join('&'),
     };
-
-    //console.log('urls', urls);
 
     Promise.all([
       fetch(urls.booking),
@@ -90,7 +86,6 @@ class Booking {
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
 
-    //console.log('datepicker', thisBooking.datePicker);
   }
 
 }
