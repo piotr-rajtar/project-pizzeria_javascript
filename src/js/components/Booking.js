@@ -135,8 +135,14 @@ class Booking {
         thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
       ){
         table.classList.add(classNames.booking.tableBooked);
+        //table.classList.remove(classNames.booking.loading);
       } else {
         table.classList.remove(classNames.booking.tableBooked);
+
+        /*add event listener for pending booking */
+        table.addEventListener('click', function(){
+          table.classList.add(classNames.booking.pending);
+        });
       }
     }
 

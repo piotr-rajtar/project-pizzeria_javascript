@@ -78,6 +78,7 @@ export const classNames = {
     wrapperActive: 'active',
   },
   booking: {
+    pending: 'pending',
     loading: 'loading',
     tableBooked: 'booked',
   },
