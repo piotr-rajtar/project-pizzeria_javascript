@@ -12,8 +12,6 @@ class Booking {
     thisBooking.initWidgets();
     thisBooking.getData();
 
-    //console.log('thisbooking', thisBooking);
-
   }
 
   getData() {
@@ -60,9 +58,6 @@ class Booking {
         ]);
       })
       .then(function([bookings, eventsCurrent, eventsRepeat]){
-        //console.log(bookings);
-        //console.log(eventsCurrent);
-        //console.log(eventsRepeat);
         thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
       });
   }
