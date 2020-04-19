@@ -135,17 +135,26 @@ class Booking {
         thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
       ){
         table.classList.add(classNames.booking.tableBooked);
-        //table.classList.remove(classNames.booking.loading);
       } else {
         table.classList.remove(classNames.booking.tableBooked);
-
-        /*add event listener for pending booking */
-        table.addEventListener('click', function(){
-          table.classList.add(classNames.booking.pending);
-        });
       }
     }
 
+    thisBooking.tableChecker();
+  }
+
+  tableChecker() {
+    const thisBooking = this;
+
+    for (let table of thisBooking.dom.tables){
+      table.classList.remove(classNames.booking.pending);
+
+      if (!table.classList.contains(classNames.booking.tableBooked)) {
+        table.addEventListener('click', function(){
+          table.classList.toggle(classNames.booking.pending);
+        });
+      }
+    }
   }
 
   render(element){
@@ -173,6 +182,7 @@ class Booking {
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
 
     thisBooking.dom.wrapper.addEventListener('updated', function(){
+      thisBooking.tableChecker();
       thisBooking.updateDOM();
     });
   }
