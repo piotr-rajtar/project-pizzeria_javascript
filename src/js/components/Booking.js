@@ -173,9 +173,7 @@ class Booking {
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
     thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(select.booking.phone);
     thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(select.booking.address);
-
-    console.log(thisBooking.dom.phone);
-    console.log(thisBooking.dom.address);
+    thisBooking.dom.form = thisBooking.dom.wrapper.querySelector(select.booking.form);
 
   }
 
@@ -196,7 +194,19 @@ class Booking {
   initBooking(){
     const thisBooking = this;
 
-    thisBooking.sendBooking();
+    thisBooking.dom.form.addEventListener('submit', function(event){
+      event.preventDefault();
+      thisBooking.phone = thisBooking.dom.phone.value;
+      thisBooking.address = thisBooking.dom.address.value;
+      thisBooking.sendBooking();
+    });
+  }
+
+  sendBooking(){
+    const thisBooking = this;
+
+    console.log(thisBooking.phone);
+    console.log(thisBooking.address);
   }
 
 }
