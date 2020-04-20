@@ -14,6 +14,8 @@ class DatePicker extends BaseWidget {
 
     thisWidget.initPlugin();
 
+    thisWidget.dom.input.value = utils.dateToStr(thisWidget.minDate);
+
   }
 
   initPlugin() {
