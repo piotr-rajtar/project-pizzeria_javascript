@@ -155,6 +155,24 @@ class Booking {
           table.classList.toggle(classNames.booking.pending);
         });
       }
+
+      if (!table.classList.contains(classNames.booking.pending)) {
+        table.addEventListener('click', function(){
+          thisBooking.tables = table.getAttribute(settings.booking.tableIdAttribute);
+        });
+      } 
+    }
+  }
+
+  starterChecker(){
+    const thisBooking = this;
+
+    const starterData = utils.serializeFormToObject(thisBooking.dom.form);
+
+    if (typeof starterData.starter == 'undefined') {
+      thisBooking.starter = [];
+    } else {
+      thisBooking.starter = starterData.starter;
     }
   }
 
@@ -198,6 +216,7 @@ class Booking {
       event.preventDefault();
       thisBooking.phone = thisBooking.dom.phone.value;
       thisBooking.address = thisBooking.dom.address.value;
+      thisBooking.starterChecker();
       thisBooking.sendBooking();
     });
   }
@@ -205,8 +224,22 @@ class Booking {
   sendBooking(){
     const thisBooking = this;
 
-    console.log(thisBooking.phone);
-    console.log(thisBooking.address);
+    const url = settings.db.url + '/' + settings.db.booking;
+
+    const payload = {
+      date: thisBooking.datePicker.value,
+      hour: thisBooking.hourPicker.value,
+      table: thisBooking.tables,
+      duration: thisBooking.hoursAmount.value,
+      ppl: thisBooking.peopleAmount.value,
+      repeat: false,
+      starters: thisBooking.starter,
+      phone: thisBooking.phone,
+      address: thisBooking.address,
+    };
+
+    console.log('payload', payload);
+
   }
 
 }
