@@ -110,6 +110,9 @@ const app = {
     const thisApp = this;
     const bookingContainer = document.querySelector(select.containerOf.booking);
     thisApp.booking = new Booking(bookingContainer);
+    
+    thisApp.submit = document.querySelector(select.booking.formSubmit);
+
   },
 
   init: function(){
