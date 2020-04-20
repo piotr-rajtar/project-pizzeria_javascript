@@ -11,6 +11,7 @@ class Booking {
     thisBooking.render(element);
     thisBooking.initWidgets();
     thisBooking.getData();
+    thisBooking.initBooking();
 
   }
 
@@ -170,6 +171,11 @@ class Booking {
     thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
+    thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(select.booking.phone);
+    thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(select.booking.address);
+
+    console.log(thisBooking.dom.phone);
+    console.log(thisBooking.dom.address);
 
   }
 
@@ -185,6 +191,12 @@ class Booking {
       thisBooking.tableChecker();
       thisBooking.updateDOM();
     });
+  }
+
+  initBooking(){
+    const thisBooking = this;
+
+    thisBooking.sendBooking();
   }
 
 }
