@@ -1,0 +1,40 @@
+.photo-headers {
+    margin-top: 30px;
+}
+
+.header-images {
+    justify-content: space-between;
+    margin-bottom: 12px;
+    height: 150px;
+    overflow: hidden;
+    
+    color: $color-light;
+
+    .image-container-1 {
+        padding: 0 7px 0 0;
+        object-fit: cover; 
+    }
+
+    .image-container-2 {
+        padding: 0 0 0 7px;
+        object-fit: cover;
+    }
+
+    img {
+        width: 100%;
+        border-radius: 2%;
+    }
+
+    h1 {
+        text-align: center;
+    }
+}
+
+.opening-text {
+    text-align: center;
+    background: $color-main;
+    height: 150px;
+    border-radius: 1%;
+    color: $color-light;
+}
+
