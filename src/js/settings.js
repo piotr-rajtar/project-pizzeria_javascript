@@ -73,6 +73,9 @@ export const select = {
   nav: {
     links: '.main-nav a',
   },
+  mainPage: {
+    slides: 'div[class="slide"]',
+  },
 };
 
 export const classNames = {

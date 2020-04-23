@@ -1,40 +1,134 @@
-.photo-headers {
-    margin-top: 30px;
+.main_page_container {
+  background-color: $color-light;
 }
 
+.container {
+  margin: 30px auto;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.photo {
+  object-fit: cover;
+  width: 100%;
+  height: 100%
+}
+
+/* HEADER */
+
+
 .header-images {
-    justify-content: space-between;
-    margin-bottom: 12px;
-    height: 150px;
-    overflow: hidden;
-    
-    color: $color-light;
+  padding-top: 30px;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  color: $color-light;
 
-    .image-container-1 {
-        padding: 0 7px 0 0;
-        object-fit: cover; 
-    }
+  .image-container {
+    flex: 0 0 50%;
+    height: 200px;
+    text-align: center;
+    position: relative;
+  }
 
-    .image-container-2 {
-        padding: 0 0 0 7px;
-        object-fit: cover;
-    }
-
-    img {
-        width: 100%;
-        border-radius: 2%;
-    }
-
+  .image-container:hover {
     h1 {
-        text-align: center;
+      transform: translate(-50%, -70px);
+      transition: all 1s;
     }
+    h2 {
+      color: $color-light;
+      transform: translate(-50%, -70px);
+      transition: all 1s;
+    }
+  }
+
+  .tile-1 {
+    padding: 0 7px 0 0;
+  }
+
+  .tile-2 {
+    padding: 0 0 0 7px;
+  }
+
+  img {
+    border-radius: 2%;
+  }
+
+  h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  h2 {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: transparent;
+  }
 }
 
 .opening-text {
-    text-align: center;
-    background: $color-main;
-    height: 150px;
-    border-radius: 1%;
-    color: $color-light;
+  align-items: center;
+  justify-content: center;
+  background: $color-main;
+  height: 200px;
+  border-radius: 1%;
+  color: $color-light;
 }
+
+.text-container {
+  flex: 0 0 100%;
+  text-align: center;
+}
+
+/* CAROUSEL */
+
+.carousel {
+  margin-top: 30px;
+}
+
+.carousel-image {
+  flex: 0 0 30%;
+  height: 150px;
+}
+
+.slides {
+  flex: 0 0 70%;
+  height: 150px;
+  text-align: center;
+}
+
+/* GALLERY */
+
+.gallery {
+  margin-top: 30px;
+
+  .gallery-content {
+    justify-content: space-around;
+  }
+
+  .tile {
+    flex: 0 0 33.333%;
+    width: 200px;
+    height: 200px;
+    padding: 12px;
+  }
+  
+}
+
+/* FOOTER */
+
+.instagram{
+  padding: 12px;
+  margin-bottom: 30px;
+  color: $color-main;
+}
+
+
 
