@@ -25,18 +25,31 @@ class MainPage {
 
   showSlides() {
     const thisPage = this;
-    let i;
     let slides = document.getElementsByClassName('slide');
-    for (i = 0; i < slides.length; i++) {
+
+    for (let i = 0; i < slides.length; i++) {
       slides[i].style.display = 'none';
     }
-    thisPage.slideIndex++;
-    if (thisPage.slideIndex > slides.length) {thisPage.slideIndex = 1;}
-    slides[thisPage.slideIndex-1].style.display = 'block';
-    setTimeout(thisPage.showSlides(), 3000); // Change image every 2 seconds
+
+    if(!slides) {
+      return;
+    }
+
+    slides[0].style.display = 'block';
+
+    setInterval(function(){
+
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+      }
+
+      thisPage.slideIndex++;
+
+      if (thisPage.slideIndex > slides.length) {thisPage.slideIndex = 1;}
+      slides[thisPage.slideIndex-1].style.display = 'block';
+  
+    }, 3000);
   }
-
-
 
 }
 
