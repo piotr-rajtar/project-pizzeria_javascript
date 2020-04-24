@@ -74,7 +74,8 @@ export const select = {
     links: '.main-nav a',
   },
   mainPage: {
-    slides: 'div[class="slide"]',
+    orderBox: '.order-box',
+    bookingBox: '.booking-box',
   },
 };
 
