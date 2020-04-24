@@ -45,7 +45,10 @@ class MainPage {
 
       thisPage.slideIndex++;
 
-      if (thisPage.slideIndex > slides.length) {thisPage.slideIndex = 1;}
+      if (thisPage.slideIndex > slides.length) {
+        thisPage.slideIndex = 1;
+      }
+      
       slides[thisPage.slideIndex-1].style.display = 'block';
   
     }, 3000);

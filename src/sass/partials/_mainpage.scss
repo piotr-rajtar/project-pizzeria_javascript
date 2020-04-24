@@ -19,7 +19,6 @@
 
 /* HEADER */
 
-
 .header-images {
   padding-top: 30px;
   justify-content: space-between;
@@ -96,12 +95,14 @@
 .carousel-image {
   flex: 0 0 30%;
   height: 150px;
+  padding: 0 7px 0 0;
 }
 
 .slides {
   flex: 0 0 70%;
   height: 150px;
   text-align: center;
+  padding: 0 0 0 7px;
 }
 
 /* GALLERY */
@@ -111,14 +112,69 @@
 
   .gallery-content {
     justify-content: space-around;
+    height: 220px;
   }
 
   .tile {
-    flex: 0 0 33.333%;
+    position: relative;
+    display: flex;
+    flex: 0 0 30%;
     width: 200px;
     height: 200px;
-    padding: 12px;
   }
+
+  .tile::before {
+    position: absolute;
+    content: '';
+    opacity: 0.5;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s;
+  }
+
+  .tile:hover {
+    .icon {
+      color: $color-light;
+      transition: all 0.5s;
+    }
+
+    .icon:hover {
+      color: $color-main;
+      transform: scale(1.5);
+    }
+    
+    &::before {
+      background-color: $color-dark;
+    }
+  }
+
+  .icons {
+    position: absolute;
+    text-align: center;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  li:first-of-type {
+    padding-left: 0;
+  }
+
+  li {
+    display: inline-block;
+    padding-left: 15px;
+  }
+
+  .icon {
+    font-size: 20px;
+    color: transparent;
+  }
+
+  
   
 }
 
