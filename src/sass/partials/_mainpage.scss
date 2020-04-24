@@ -115,16 +115,17 @@
   margin-top: 30px;
 
   .gallery-content {
-    justify-content: space-around;
-    height: 220px;
+    justify-content: space-between;
+    height: 200px;
   }
 
   .tile {
     position: relative;
     display: flex;
-    flex: 0 0 30%;
+    flex: 0 0 33%;
     width: 200px;
     height: 200px;
+    padding-bottom: 2px;
   }
 
   .tile::before {
