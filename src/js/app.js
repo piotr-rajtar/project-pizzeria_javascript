@@ -28,25 +28,17 @@ const app = {
         event.preventDefault();
         const clickedElement = this;
 
-        /* get ID from gref attribut */
-
         const id = clickedElement.getAttribute('href').replace('#', '');
-
-        /* run activate page with that ID */
 
         thisApp.activatePage(id);
 
-        /* change URL hash */
         window.location.hash = '#/' + id;
       });
     }
-
   },
 
   activatePage: function(pageId){
     const thisApp = this;
-
-    /* add class "active" to matching page, remove from non-matching */
 
     for (let page of thisApp.pages){
       page.classList.toggle(
@@ -54,8 +46,6 @@ const app = {
         page.id == pageId
       );
     }
-
-    /* add class "active" to matching link, remove from non-matching */
 
     for (let link of thisApp.navLinks){
       link.classList.toggle(
@@ -85,11 +75,8 @@ const app = {
         return rawResponse.json();
       })
       .then(function(parsedResponse){
-
-        /* saved parsedResponse as thisApp.data.products */
         thisApp.data.products = parsedResponse;
 
-        /* execute initMenu method */
         thisApp.initMenu();
       });
   },

@@ -17,7 +17,7 @@ class Cart {
   getElements(element){
     const thisCart = this;
 
-    thisCart.dom = {}; //tu beda przechowywane wszystkie elementy DOM, wyszukane w koszyku
+    thisCart.dom = {};
 
     thisCart.dom.wrapper = element; //cały koszyk
     thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger); //podsumowanie zamówienia na dole
@@ -56,9 +56,9 @@ class Cart {
 
   add(menuProduct){
     const thisCart = this;
-    const generatedHTML = templates.cartProduct(menuProduct); //z obiektu produktu - np pizza z zaznaczonymi opcjami, generujemy HTML
+    const generatedHTML = templates.cartProduct(menuProduct);
     const generatedDOM = utils.createDOMFromHTML(generatedHTML); // ten kod HTML wrzucamy do diva
-    const cartProductList = document.querySelector(select.cart.productList); //do stałej przypisuje wrapper produktow w HTMLu
+    const cartProductList = document.querySelector(select.cart.productList);
     thisCart.dom.productList = generatedDOM; //do wrappera produktow w koszyku wrzucam swoje divy
 
     cartProductList.appendChild(thisCart.dom.productList); //do wrappera produktow w HTML wrzucam produkty z wrappera produktow w koszyku
@@ -92,7 +92,7 @@ class Cart {
 
     const index = thisCart.products.indexOf(cartProduct); //zbieram indeks elementu ktory chce usunac
 
-    thisCart.products.splice(index, 1); //usuwam dany element z tablicy produktow
+    thisCart.products.splice(index, 1); 
 
     cartProduct.dom.wrapper.remove(); //usuwam dany element DOM (element li  z koszyka ktory jest przekazywany do klasy cartProduct)
     thisCart.update();
@@ -101,7 +101,7 @@ class Cart {
   sendOrder(){
     const thisCart = this;
 
-    const url = settings.db.url + '/' + settings.db.order; //adres endpointu
+    const url = settings.db.url + '/' + settings.db.order;
 
     const payload = {
       phone: thisCart.phone,
@@ -120,7 +120,7 @@ class Cart {
     const options = {
       method: 'POST', //zmieniamy domyslna metode GET na POST
       headers: { 
-        'Content-Type': 'application/json', //dajemy serwerpwi znac jaki rodzaj danych do niego wysylamy
+        'Content-Type': 'application/json', //dajemy serwerowi znac jaki rodzaj danych do niego wysylamy
       },
       body: JSON.stringify(payload), //tresc 
     };
