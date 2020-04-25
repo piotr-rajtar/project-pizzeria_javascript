@@ -66,8 +66,6 @@ class Booking {
   parseData(bookings, eventsCurrent, eventsRepeat){
     const thisBooking = this;
 
-    console.log('bookings', bookings);
-
     thisBooking.booked = {};
 
     for(let item of bookings){
